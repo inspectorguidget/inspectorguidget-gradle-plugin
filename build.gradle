@@ -1,0 +1,43 @@
+buildscript {
+    repositories {
+        mavenCentral()
+    }
+
+    dependencies {
+    }
+}
+
+group = 'fr.inria.inspectorguidget'
+version = '1.0-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+    jcenter()
+    maven {
+        url 'http://maven.inria.fr/artifactory/malai-public-release'
+        content {
+            includeGroup "fr.inria.inspectorguidget"
+        }
+    }
+    maven {
+        url 'http://maven.inria.fr/artifactory/malai-public-snapshot'
+        content {
+            includeGroup "fr.inria.inspectorguidget"
+        }
+    }
+    maven {
+        url 'http://maven-eclipse.github.io/maven'
+    }
+}
+
+apply plugin: 'groovy'
+
+sourceCompatibility = 11
+targetCompatibility = 11
+
+dependencies {
+    compile gradleApi()
+    compile localGroovy()
+    compile 'com.android.tools.build:gradle:1.5.0'
+    compile "fr.inria.inspectorguidget:inspectorguidget-java:1.0-SNAPSHOT"
+}
