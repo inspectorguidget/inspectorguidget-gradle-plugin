@@ -8,7 +8,6 @@ pipeline {
     agent any
 
     tools {
-        gradle 'GRADLE'
         jdk 'jdk11'
     }
 
