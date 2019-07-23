@@ -17,31 +17,35 @@ class InspectorPlugin implements Plugin<Project> {
   @Override
   void apply(final Project project) {
 
-    Logger logger = project.getLogger()
-    PrintWriter pw = null
-    UIDataAnalyser analyser = new UIDataAnalyser()
+    def extension = project.extensions.create('inspectorguidget', InspectorExtension)
 
-    logger.info("Adding input ressource...")
-    analyser.addInputResource(project.getProjectDir().getPath())
+    project.task('extractData') {
+      Logger logger = project.getLogger()
+      PrintWriter pw = null
+      UIDataAnalyser analyser = new UIDataAnalyser()
 
-    logger.info("adding dependencies path...")
-    Configuration configuration = project.getConfigurations().getByName("compile")
-    String[] dependencies = configuration.getDependencies().toArray(String[])
-    analyser.setSourceClasspath(dependencies)
+      logger.info("Adding input ressource...")
+      analyser.addInputResource(project.getProjectDir().getPath())
 
-    logger.info("Extracting data...")
-    UIData data = analyser.extractUIData()
+      logger.info("adding dependencies path...")
+      Configuration configuration = project.getConfigurations().getByName("compile")
+      String[] dependencies = configuration.getDependencies().toArray(String[])
+      analyser.setSourceClasspath(dependencies)
 
-    logger.info("Building data file...")
-    try {
-      pw = new PrintWriter("data.json")  // add parameter to change fileName
-      pw.print(new Klaxon().toJsonString(data,null))
-    } catch (FileNotFoundException e) {
-      logger.log(LogLevel.ERROR," ", e.fillInStackTrace())
+      logger.info("Extracting data...")
+      UIData data = analyser.extractUIData()
 
-    } finally {
-      if(pw != null) {
-        pw.close()
+      logger.info("Building data file...")
+      try {
+        pw = new PrintWriter(extension.filename)  // add parameter to change fileName
+        pw.print(new Klaxon().toJsonString(data, null))
+      } catch (FileNotFoundException e) {
+        logger.log(LogLevel.ERROR, " ", e.fillInStackTrace())
+
+      } finally {
+        if (pw != null) {
+          pw.close()
+        }
       }
     }
   }

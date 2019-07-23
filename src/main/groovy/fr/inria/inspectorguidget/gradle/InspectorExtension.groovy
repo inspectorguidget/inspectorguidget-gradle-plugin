@@ -1,5 +1,6 @@
 package fr.inria.inspectorguidget.gradle
 
 class InspectorExtension {
-    /** Options **/
+    String filename = "data.json"
+
 }
