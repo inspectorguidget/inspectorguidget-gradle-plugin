@@ -15,15 +15,9 @@ repositories {
     jcenter()
     maven {
         url 'http://maven.inria.fr/artifactory/malai-public-release'
-        content {
-            includeGroup "fr.inria.inspectorguidget"
-        }
     }
     maven {
         url 'http://maven.inria.fr/artifactory/malai-public-snapshot'
-        content {
-            includeGroup "fr.inria.inspectorguidget"
-        }
     }
     maven {
         url 'http://maven-eclipse.github.io/maven'

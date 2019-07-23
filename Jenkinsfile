@@ -55,7 +55,7 @@ pipeline {
 
         stage ('Build') {
             steps {
-                sh './gradlew clean build' //run a gradle build
+                sh 'gradle clean build' //run a gradle build
             }
         }
 
