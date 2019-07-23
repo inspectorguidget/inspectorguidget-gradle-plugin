@@ -56,8 +56,9 @@ pipeline {
         stage ('Build') {
             steps {
                 rtGradleRun (
+                    buildFile: 'build.gradle',
                     deployerId : 'gradleDeployer',
-                    tasks : 'clean build',
+                    tasks : 'clean artifactoryPublish',
                     useWrapper: true
                 )
             }
