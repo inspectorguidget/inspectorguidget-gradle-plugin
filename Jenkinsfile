@@ -55,7 +55,7 @@ pipeline {
 
         stage ('Build') {
             steps {
-                sh './gradlew clean build --no-daemon' //run a gradle build
+                sh './gradlew clean build' //run a gradle build
             }
         }
 
