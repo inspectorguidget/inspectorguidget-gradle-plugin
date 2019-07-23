@@ -56,8 +56,9 @@ pipeline {
         stage ('Build') {
             steps {
                 rtGradleRun (
+                    deployerId : 'gradleDeployer',
                     tasks : 'clean build',
-                    deployerId : 'gradleDeployer'
+                    useWrapper: true
                 )
             }
         }
