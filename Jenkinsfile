@@ -46,7 +46,7 @@ pipeline {
                 )
 
                 rtGradleDeployer (
-                    id: "Gradle Deployer",
+                    id: "gradleDeployer",
                     serverId: "InriaArtifactoryServer",
                     repo: "malai-public-snapshot",
                 )
@@ -55,7 +55,11 @@ pipeline {
 
         stage ('Build') {
             steps {
-                sh 'gradle clean build' //run a gradle build
+                rtGradleRun (
+                    buildFile : 'build.gradle',
+                    tasks : 'clean build',
+                    deployerId : 'gradleDeployer'
+                )
             }
         }
 
