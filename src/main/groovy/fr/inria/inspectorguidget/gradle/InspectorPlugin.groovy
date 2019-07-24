@@ -1,8 +1,9 @@
 package fr.inria.inspectorguidget.gradle
 
-import com.beust.klaxon.Klaxon
 import fr.inria.inspectorguidget.api.analyser.UIDataAnalyser
 import fr.inria.inspectorguidget.data.UIData
+
+import com.beust.klaxon.Klaxon
 import org.gradle.api.Plugin
 import org.gradle.api.Project
 import org.gradle.api.artifacts.Configuration
@@ -23,7 +24,7 @@ class InspectorPlugin implements Plugin<Project> {
       logger.info("Starting extracting data...")
 
       PrintWriter pw = null
-      UIDataAnalyser analyser = new UIDataAnalyser()
+      def analyser = new UIDataAnalyser()
 
       logger.info("Adding input ressource...")
       analyser.addInputResource(project.getProjectDir().getPath())
