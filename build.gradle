@@ -7,9 +7,6 @@ buildscript {
     }
 }
 
-group = 'fr.inria.inspectorguidget'
-version = '1.0-SNAPSHOT'
-
 repositories {
     mavenCentral()
     jcenter()
