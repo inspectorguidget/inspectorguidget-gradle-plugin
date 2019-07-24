@@ -20,6 +20,8 @@ class InspectorPlugin implements Plugin<Project> {
 
     project.task('extractData') {
       Logger logger = project.getLogger()
+      logger.info("Starting extracting data...")
+
       PrintWriter pw = null
       UIDataAnalyser analyser = new UIDataAnalyser()
 
