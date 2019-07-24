@@ -21,13 +21,11 @@ class InspectorPlugin implements Plugin<Project> {
 
     project.task('extractData') {
       
-      Logger logger = project.getLogger()
+      def logger = project.getLogger()
       logger.info("Starting extracting data...")
 
-
       def analyser = new UIDataAnalyser()
-
-      PrintWriter pw
+      def pw
 
       logger.info("Adding input ressource...")
       analyser.addInputResource(project.getProjectDir().getPath())
