@@ -20,11 +20,14 @@ class InspectorPlugin implements Plugin<Project> {
     def extension = project.extensions.create('inspectorguidget', InspectorExtension)
 
     project.task('extractData') {
+      
       Logger logger = project.getLogger()
       logger.info("Starting extracting data...")
 
-      PrintWriter pw = null
+
       def analyser = new UIDataAnalyser()
+
+      PrintWriter pw
 
       logger.info("Adding input ressource...")
       analyser.addInputResource(project.getProjectDir().getPath())
