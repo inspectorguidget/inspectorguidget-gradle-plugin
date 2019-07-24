@@ -35,4 +35,5 @@ dependencies {
     compile localGroovy()
     compile 'com.android.tools.build:gradle:1.5.0'
     compile "fr.inria.inspectorguidget:inspectorguidget-java:1.0-SNAPSHOT"
+    compile "fr.inria.inspectorguidget:inspectorguidget-java-api:1.0-SNAPSHOT"
 }

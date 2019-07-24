@@ -9,7 +9,6 @@ import org.gradle.api.artifacts.Configuration
 import org.gradle.api.logging.LogLevel
 import org.gradle.api.logging.Logger
 
-
 /**
  * Gradle plugin for InspectorGuidget.
  */
