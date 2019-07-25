@@ -33,19 +33,14 @@ class InspectorPlugin implements Plugin<Project> {
 
       logger.lifecycle("adding dependencies path...")
 
-      List dependencies = new LinkedList()
-
       project.configurations.each { conf ->
-        println "    Configuration: ${conf.name}"
         conf.allDependencies.each { dep ->
-          dependencies.add(dep.toString())
+          conf.files(dep).each{
+            file -> logger.lifecycle(file.getAbsolutePath())
+          }
         }
       }
-      String[] mydep = new String[dependencies.size()]
-      for(int i=0; i<dependencies.size();i++){
-        mydep[i] = dependencies.get(i)
-        logger.lifecycle(mydep[i])
-      }
+
 
 
       //analyser.setSourceClasspath(dependencies)
