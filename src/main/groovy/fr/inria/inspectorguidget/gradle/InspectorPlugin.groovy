@@ -34,14 +34,8 @@ class InspectorPlugin implements Plugin<Project> {
       logger.lifecycle("adding dependencies path...")
 
       project.configurations.each { conf ->
-        conf.allDependencies.each { dep ->
-          conf.files(dep).each{
-            file -> logger.lifecycle(file.getAbsolutePath())
-          }
-        }
+        logger.lifecycle(conf.asPath)
       }
-
-
 
       //analyser.setSourceClasspath(dependencies)
 
