@@ -42,7 +42,7 @@ class InspectorPlugin implements Plugin<Project> {
         }
       }
       String[] mydep = new String[dependencies.size()]
-      for(int i=0; i<dependencies.length;i++){
+      for(int i=0; i<dependencies.size();i++){
         mydep[i] = dependencies.getComponent(i)
         logger.lifecycle(mydep[i])
       }
