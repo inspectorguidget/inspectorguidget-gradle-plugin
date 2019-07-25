@@ -33,10 +33,14 @@ class InspectorPlugin implements Plugin<Project> {
       logger.info("adding dependencies path...")
       Configuration configuration = project.getConfigurations().getByName("compile")
       String[] dependencies = configuration.getDependencies().toArray(String[])
-      analyser.setSourceClasspath(dependencies)
+
+      for(int i=0; i<dependencies.length;i++){
+        logger.info(dependencies[i])
+      }
+      //analyser.setSourceClasspath(dependencies)
 
       logger.info("Extracting data...")
-      UIData data = analyser.extractUIData()
+      /*UIData data = analyser.extractUIData()
 
       logger.info("Building data file...")
       try {
@@ -49,7 +53,7 @@ class InspectorPlugin implements Plugin<Project> {
         if (pw != null) {
           pw.close()
         }
-      }
+      }*/
     }
   }
 }
