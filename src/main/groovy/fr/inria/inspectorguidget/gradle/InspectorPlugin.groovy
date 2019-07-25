@@ -23,26 +23,28 @@ class InspectorPlugin implements Plugin<Project> {
     project.task('extractData') {
       
       def logger = project.getLogger()
-      logger.lifecycle("Starting extracting data...")
+      logger.info("Starting extracting data...")
 
       def analyser = new UIDataAnalyser()
       def pw
 
-      logger.lifecycle("Adding input ressource...")
+      logger.info("Adding input ressource...")
       analyser.addInputResource(project.getProjectDir().getPath())
 
-      logger.lifecycle("adding dependencies path...")
+      logger.info("adding dependencies path...")
 
       project.configurations.each { conf ->
-        logger.lifecycle(conf.asPath)
+        conf.getAllArtifacts().each { art ->
+          logger.info(art.file.getAbsolutePath())
+        }
       }
 
       //analyser.setSourceClasspath(dependencies)
 
-      logger.lifecycle("Extracting data...")
+      logger.info("Extracting data...")
       /*UIData data = analyser.extractUIData()
 
-      logger.lifecycle("Building data file...")
+      logger.info("Building data file...")
       try {
         pw = new PrintWriter(extension.filename)  // add parameter to change fileName
         pw.print(new Klaxon().toJsonString(data, null))
