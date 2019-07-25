@@ -32,7 +32,7 @@ class InspectorPlugin implements Plugin<Project> {
 
       logger.lifecycle("adding dependencies path...")
 
-      JList<String> dependencies
+      JList<String> dependencies = new JList<String>()
 
       project.configurations.each { conf ->
         println "    Configuration: ${conf.name}"
