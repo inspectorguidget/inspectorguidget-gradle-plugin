@@ -8,6 +8,7 @@ import org.gradle.api.Plugin
 import org.gradle.api.Project
 import org.gradle.api.artifacts.Configuration
 import org.gradle.api.logging.Logger
+import org.gradle.internal.impldep.org.testng.collections.Lists
 
 import javax.swing.JList
 
@@ -32,7 +33,7 @@ class InspectorPlugin implements Plugin<Project> {
 
       logger.lifecycle("adding dependencies path...")
 
-      JList<String> dependencies = new JList<String>()
+      List dependencies = new LinkedList()
 
       project.configurations.each { conf ->
         println "    Configuration: ${conf.name}"
