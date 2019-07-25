@@ -7,7 +7,6 @@ import com.beust.klaxon.Klaxon
 import org.gradle.api.Plugin
 import org.gradle.api.Project
 import org.gradle.api.artifacts.Configuration
-import org.gradle.api.logging.LogLevel
 import org.gradle.api.logging.Logger
 
 /**
@@ -16,33 +15,34 @@ import org.gradle.api.logging.Logger
 class InspectorPlugin implements Plugin<Project> {
   @Override
   void apply(final Project project) {
-
     def extension = project.extensions.create('inspectorguidget', InspectorExtension)
 
     project.task('extractData') {
       
       def logger = project.getLogger()
-      logger.info("Starting extracting data...")
+      logger.lifecycle("Starting extracting data...")
 
       def analyser = new UIDataAnalyser()
       def pw
 
-      logger.info("Adding input ressource...")
+      logger.lifecycle("Adding input ressource...")
       analyser.addInputResource(project.getProjectDir().getPath())
 
-      logger.info("adding dependencies path...")
-      Configuration configuration = project.getConfigurations().getByName("compile")
+      logger.lifecycle("adding dependencies path...")
+      /*Configuration configuration = project.getConfigurations().getByName("compile")
       String[] dependencies = configuration.getDependencies().toArray(String[])
-
       for(int i=0; i<dependencies.length;i++){
-        logger.info(dependencies[i])
-      }
+        logger.lifecycle(dependencies[i])
+      }*/
+      String dep = project.buildscript.dependencies.toString()
+      logger.lifecycle(dep)
+
       //analyser.setSourceClasspath(dependencies)
 
-      logger.info("Extracting data...")
+      logger.lifecycle("Extracting data...")
       /*UIData data = analyser.extractUIData()
 
-      logger.info("Building data file...")
+      logger.lifecycle("Building data file...")
       try {
         pw = new PrintWriter(extension.filename)  // add parameter to change fileName
         pw.print(new Klaxon().toJsonString(data, null))
