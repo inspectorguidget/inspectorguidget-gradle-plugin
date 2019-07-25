@@ -4,6 +4,7 @@ import fr.inria.inspectorguidget.api.analyser.UIDataAnalyser
 import fr.inria.inspectorguidget.data.UIData
 
 import com.beust.klaxon.Klaxon
+import org.apache.log4j.lf5.LogLevel
 import org.gradle.api.Plugin
 import org.gradle.api.Project
 import org.gradle.api.artifacts.Configuration
@@ -33,29 +34,35 @@ class InspectorPlugin implements Plugin<Project> {
 
       logger.info("adding dependencies path...")
 
+      List dep = new ArrayList()
+
       project.configurations.each { conf ->
         conf.getAllArtifacts().each { art ->
-          logger.info(art.file.getAbsolutePath())
+          dep.add(art.file.getAbsolutePath())
         }
       }
 
-      //analyser.setSourceClasspath(dependencies)
+      String[] dependencies = new String[dep.size()];
+      for(int i=0; i<dep.size();i++){
+        dependencies[i] = dep.get(i)
+      }
+      analyser.setSourceClasspath(dependencies)
 
       logger.info("Extracting data...")
-      /*UIData data = analyser.extractUIData()
+      UIData data = analyser.extractUIData()
 
       logger.info("Building data file...")
       try {
         pw = new PrintWriter(extension.filename)  // add parameter to change fileName
         pw.print(new Klaxon().toJsonString(data, null))
       } catch (FileNotFoundException e) {
-        logger.log(LogLevel.ERROR, " ", e.fillInStackTrace())
+        logger.error("can't write in data.json" , e.printStackTrace())
 
       } finally {
         if (pw != null) {
           pw.close()
         }
-      }*/
+      }
     }
   }
 }
