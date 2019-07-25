@@ -9,6 +9,8 @@ import org.gradle.api.Project
 import org.gradle.api.artifacts.Configuration
 import org.gradle.api.logging.Logger
 
+import javax.swing.JList
+
 /**
  * Gradle plugin for InspectorGuidget.
  */
@@ -29,13 +31,21 @@ class InspectorPlugin implements Plugin<Project> {
       analyser.addInputResource(project.getProjectDir().getPath())
 
       logger.lifecycle("adding dependencies path...")
-      /*Configuration configuration = project.getConfigurations().getByName("compile")
-      String[] dependencies = configuration.getDependencies().toArray(String[])
+
+      JList<String> dependencies
+
+      project.configurations.each { conf ->
+        println "    Configuration: ${conf.name}"
+        conf.allDependencies.each { dep ->
+          dependencies.add(dep.toString())
+        }
+      }
+      String[] mydep = new String[dependencies.size()]
       for(int i=0; i<dependencies.length;i++){
-        logger.lifecycle(dependencies[i])
-      }*/
-      String dep = project.buildscript.dependencies.toString()
-      logger.lifecycle(dep)
+        mydep[i] = dependencies.getComponent(i)
+        logger.lifecycle(mydep[i])
+      }
+
 
       //analyser.setSourceClasspath(dependencies)
 
