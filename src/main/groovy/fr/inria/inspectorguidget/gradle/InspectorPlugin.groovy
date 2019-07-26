@@ -51,7 +51,13 @@ class InspectorPlugin implements Plugin<Project> {
       logger.info("Extracting data...")
       UIData data = analyser.extractUIData()
 
+
       logger.info("Building data file...")
+
+      if(extension.filename == null){
+        extension.filename = "data.json"
+      }
+
       try {
         pw = new PrintWriter(extension.filename)  // add parameter to change fileName
         pw.print(new Klaxon().toJsonString(data, null))
